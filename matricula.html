@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrícula - Associação de Karate Kombat</title>
+  <style>
+    :root {
+      --primary-orange: #f39c12;
+      --secondary-yellow: #f1c40f;
+      --dark-bg: #0d0d0d;
+      --card-bg: rgba(20, 20, 20, 0.95);
+      --text-color: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: var(--card-bg);
+      border: 1px solid rgba(243, 156, 18, 0.4);
+      border-radius: 12px;
+      padding: 35px;
+      width: 100%;
+      max-width: 550px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: var(--secondary-yellow);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      font-size: 1.8rem;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #ddd;
+      font-weight: 600;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background-color: #1a1a1a;
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+      border: none;
+      border-radius: 30px;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.5);
+    }
+
+    .btn-submit:disabled {
+      background: #555;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    #statusMessage {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      display: none;
+    }
+
+    .status-success {
+      background-color: rgba(46, 204, 113, 0.2);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+    }
+
+    .status-error {
+      background-color: rgba(231, 76, 60, 0.2);
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Formulário de Matrícula</h2>
+    <form id="matriculaForm">
+      
+      <div class="form-group">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+
+      <div class="form-group">
+        <label for="idade">Idade</label>
+        <input type="number" id="idade" name="idade" min="4" max="100" required>
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(71) 99999-9999" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="graduacao">Nível de Graduação</label>
+        <select id="graduacao" name="graduacao" required>
+          <option value="">Selecione...</option>
+          <option value="Iniciante (Faixa Branca)">Iniciante (Faixa Branca)</option>
+          <option value="Faixa Amarela">Faixa Amarela</option>
+          <option value="Faixa Vermelha">Faixa Vermelha</option>
+          <option value="Faixa Laranja">Faixa Laranja</option>
+          <option value="Faixa Verde">Faixa Verde</option>
+          <option value="Faixa Roxa">Faixa Roxa</option>
+          <option value="Faixa Marrom">Faixa Marrom</option>
+          <option value="Faixa Preta">Faixa Preta</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="endereco">Endereço Completo</label>
+        <input type="text" id="endereco" name="endereco" required>
+      </div>
+
+      <div class="form-group">
+        <label for="rg">RG</label>
+        <input type="text" id="rg" name="rg" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" required>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">Enviar Matrícula</button>
+    </form>
+
+    <div id="statusMessage"></div>
+  </div>
+
+  <script>
+  // Cole abaixo a URL completa da sua Implantação do Google Apps Script (termina em /exec)
+  const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzUOLvvNxqt_J1RGuccHjTniV_Efkrwqyh5Y5fVCGOnqNimgrlPH-D_3r9V_E0zBoG3/exec";
+
+  const form = document.getElementById('matriculaForm');
+const btnSubmit = document.getElementById('btnSubmit');
+const statusMessage = document.getElementById('statusMessage');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Enviando...';
+  statusMessage.style.display = 'none';
+
+  // Usa URLSearchParams para formatar como dados de formulário web (NÃO JSON)
+  const formData = new URLSearchParams();
+  formData.append('nome', document.getElementById('nome').value);
+  formData.append('idade', document.getElementById('idade').value);
+  formData.append('telefone', document.getElementById('telefone').value);
+  formData.append('email', document.getElementById('email').value);
+  formData.append('graduacao', document.getElementById('graduacao').value);
+  formData.append('endereco', document.getElementById('endereco').value);
+  formData.append('rg', document.getElementById('rg').value);
+  formData.append('cpf', document.getElementById('cpf').value);
+
+  fetch(URL_GOOGLE_SCRIPT, {
+    method: 'POST',
+    mode: 'no-cors', // Permite o envio sem bloqueio de CORS
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formData.toString() // Converte para o formato: nome=Valor&idade=Valor...
+  })
+  .then(() => {
+    statusMessage.className = 'status-success';
+    statusMessage.textContent = 'Matrícula enviada com sucesso! Entraremos em contato.';
+    statusMessage.style.display = 'block';
+    form.reset();
+  })
+  .catch(error => {
+    statusMessage.className = 'status-error';
+    statusMessage.textContent = 'Erro ao enviar dados. Tente novamente.';
+    statusMessage.style.display = 'block';
+    console.error('Erro:', error);
+  })
+  .finally(() => {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = 'Enviar Matrícula';
+  });
+});
+</script>
+</body>
+</html>

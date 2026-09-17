@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Associação de Karate Kombat - Salvador / Bahia</title>
+  <style>
+    :root {
+      --primary-orange: #f39c12;
+      --secondary-yellow: #f1c40f;
+      --dark-bg: #0d0d0d;
+      --card-bg: rgba(20, 20, 20, 0.9);
+      --text-color: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      overflow-x: hidden;
+      line-height: 1.6;
+      display: block;
+      
+    }
+
+    /* Cabeçalho */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background: rgba(0, 0, 0, 0.95);
+      border-bottom: 3px solid var(--primary-orange);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+    }
+
+    .logo-text h1 {
+      font-size: 1.2rem;
+      color: var(--secondary-yellow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Seção Hero com Marca d'Água */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(13, 13, 13, 0.95), rgba(0, 0, 0, 0.85));
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: url('logo.png') no-repeat center center;
+      background-size: contain;
+      opacity: 0.2;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+    }
+
+    .hero-content h2 {
+      font-size: 3rem;
+      color: var(--secondary-yellow);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      padding: 15px 35px;
+      background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+      color: #000;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 30px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+    }
+
+    /* Estilização da Seção Sobre (Sensei Guilherme Lopes) */
+    .about-section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--secondary-yellow);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary-orange);
+      margin: 10px auto 0;
+    }
+
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(243, 156, 18, 0.3);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .about-card p {
+      color: #eee;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .about-subtitle {
+      color: var(--primary-orange);
+      font-size: 1.4rem;
+      margin: 25px 0 15px;
+      border-left: 4px solid var(--secondary-yellow);
+      padding-left: 10px;
+    }
+
+    .about-list {
+      list-style: none;
+    }
+
+    .about-list li {
+      margin-bottom: 20px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .about-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--secondary-yellow);
+      font-size: 1.2rem;
+    }
+
+    .about-list strong {
+      color: var(--secondary-yellow);
+    }
+
+    /* Modalidades / Cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 40px 20px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(243, 156, 18, 0.3);
+      text-align: center;
+    }
+
+    .card h3 {
+      color: var(--secondary-yellow);
+      margin-bottom: 15px;
+    }
+
+    /* Seção de Contato e Redes Sociais */
+    .contact-section {
+      background: #141414;
+      padding: 60px 20px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn-social {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .btn-facebook {
+      background: #1877f2;
+    }
+
+    .btn-facebook:hover {
+      background: #145dbf;
+      transform: translateY(-3px);
+    }
+
+    .btn-instagram {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+
+    .btn-instagram:hover {
+      opacity: 0.9;
+      transform: translateY(-3px);
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #050505;
+      color: #9c9b9b;
+      border-top: 1px solid #222;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+      }
+      .hero-content h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho com a Logo -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo Associação de Karate Salvador">
+      <div class="logo-text">
+        <h1>Associação de Karate Kombat</h1>
+        <span>Salvador - Bahia - Brasil</span>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Seção Principal -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h2>Disciplina, Respeito e Força</h2>
+      <p>Aprenda a arte do Karate tradicional em Salvador. Aulas para todas as idades, focadas no desenvolvimento físico, mental e na defesa pessoal.</p>
+      <!-- Troque esta linha no site principal -->
+      <a href="matricula.html" target="_blank" class="btn-cta">Matricule-se</a>
+    </div>
+  </section>
+
+  <!-- Seção Sobre - Sensei Guilherme Lopes -->
+  <section class="about-section" id="sobre">
+    <h2 class="section-title">Sobre Associação de Karatê Kombat</h2>
+    <div class="about-card">
+      <p>Tendo como liderança principal <strong>Sensei Guilherme Lopes</strong> é uma das figuras históricas e mais respeitadas do Karatê no estado da Bahia. Discípulo do lendário <strong>Ivo Rangel</strong> — pioneiro e grande divisor de águas da arte marcial em território baiano —, Guilherme seguiu os passos de seu mestre na consolidação e institucionalização do esporte na região.</p>
+
+      <h3 class="about-subtitle">Trajetória e Formação</h3>
+      <ul class="about-list">
+        <li>
+          <strong>Linhagem:</strong> Foi aluno do Prof. Ivo Rangel (falecido em 2014), absorvendo a tradição, disciplina e filosofia do Karatê clássico trazido e difundido por Rangel na Bahia a partir das décadas de 1960 e 1970.
+        </li>
+        <li>
+          <strong>Graduação (7º Dan - Shihan):</strong> Atingiu a graduação de faixa preta 7º Dan (Shihan), título reservado a mestres com décadas de dedicação, profundo conhecimento técnico e contribuição notável ao ensino da arte marcial.
+        </li>
+      </ul>
+
+      <h3 class="about-subtitle">Atuação Institucional e Legado na Bahia</h3>
+      <ul class="about-list">
+        <li>
+          <strong>Federação de Karatê da Bahia (FKBA):</strong> Associação de Karatê Kombat do Sensei Guilherme Lopes está diretamente envolvido na estruturação das artes marciais no estado. Ele atua na equipe de arbitragem da Federação de Karatê da Bahia (FKBA), entidade criada ao lado de outros grandes nomes para organizar torneios, padronizar exames de faixa e expandir o esporte.
+        </li>
+        <li>
+          <strong>Formação de Atletas:</strong> Como mestre e professor, dedicou grande parte de sua vida à formação de novas gerações de karatecas, mantendo viva a linhagem técnica e a conduta ética transmitidas pelo fundador do Karatê Shotokan Gichin Funakoshi.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Modalidades / Destaques -->
+  <section class="features" id="modalidades">
+    <div class="card">
+      <h3>Karate Infantil</h3>
+      <p>Desenvolvimento da coordenação motora, foco, disciplina e respeito desde cedo.</p>
+    </div>
+    <div class="card">
+      <h3>Karate Adulto</h3>
+      <p>Condicionamento físico, alívio do estresse e técnicas avançadas de defesa pessoal.</p>
+    </div>
+    <div class="card">
+      <h3>Treinamento de Competição</h3>
+      <p>Preparação física e tática de Kata e Kumite para atletas de alto rendimento.</p>
+    </div>
+  </section>
+
+  <!-- Seção de Contato -->
+  <section class="contact-section" id="contato">
+    <h2 class="section-title">Entre em Contato</h2>
+    <p>Acompanhe nosso trabalho e agende sua aula através das redes sociais oficiais:</p>
+    
+    <div class="social-buttons">
+      <a href="https://www.facebook.com/www.KarateKombat.com.br/" target="_blank" class="btn-social btn-facebook">
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/karatekombat_/" target="_blank" class="btn-social btn-instagram">
+        Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2026 Associação de Karate Kombat - Salvador/BA. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
